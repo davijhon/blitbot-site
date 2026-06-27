@@ -3,38 +3,516 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blit Bot</title>
+  <title>Sixvort — Automatiza el WhatsApp de tu negocio con Blitbot</title>
+  <meta name="description" content="Sixvort desarrolla Blitbot, el asistente de ventas y atención por WhatsApp para PyMEs de América Latina. Software B2B de automatización: responde, toma pedidos, organiza clientes y confirma pagos." />
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #f5f7f9;
+      --ink: #0f1b24;
+      --ink-soft: #51626d;
+      --line: #e4e9ed;
+      --brand: #0b3a53;
+      --brand-2: #12597e;
+      --accent: #1fa463;
+      --accent-soft: #e8f6ef;
+      --radius: 16px;
+      --shadow: 0 10px 40px rgba(15, 27, 36, 0.08);
     }
-    .center {
-      text-align: center;
-      user-select: none;
+    * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    .icon { font-size: 7rem; line-height: 1; }
-    h1 {
-      margin: 1rem 0 0;
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      color: #111;
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      font-size: .95rem; font-weight: 600; padding: .8rem 1.4rem; border-radius: 999px;
+      border: 1px solid transparent; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(31,164,99,.3); }
+    .btn-ghost { background: transparent; color: var(--brand); border-color: var(--line); }
+    .btn-ghost:hover { background: var(--bg-soft); }
+    .btn-light { background: #fff; color: var(--brand); }
+    .btn-light:hover { transform: translateY(-1px); }
+
+    /* ---------- Header ---------- */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,.9); backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .brand { display: flex; align-items: center; gap: .6rem; font-weight: 800; font-size: 1.25rem; letter-spacing: -.5px; color: var(--brand); }
+    .brand .logo {
+      width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 60%, var(--accent) 130%);
+      color: #fff; font-size: 1.1rem;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.6rem; }
+    .nav-links a { color: var(--ink-soft); font-size: .92rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta { display: flex; align-items: center; gap: .75rem; }
+    .menu-toggle { display: none; background: none; border: 0; font-size: 1.5rem; color: var(--brand); cursor: pointer; }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 4.5rem 0 4rem; background:
+      radial-gradient(1100px 480px at 85% -10%, #e9f5fb 0%, rgba(233,245,251,0) 60%),
+      radial-gradient(800px 420px at 0% 10%, #eefaf3 0%, rgba(238,250,243,0) 55%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem; font-size: .8rem; font-weight: 600;
+      color: var(--accent); background: var(--accent-soft); padding: .4rem .8rem; border-radius: 999px; margin-bottom: 1.2rem;
+    }
+    .hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.2rem); line-height: 1.1; letter-spacing: -1.2px; color: var(--brand); }
+    .hero h1 span { color: var(--accent); }
+    .hero p.lead { margin-top: 1.2rem; font-size: 1.12rem; color: var(--ink-soft); max-width: 33rem; }
+    .hero-cta { margin-top: 2rem; display: flex; gap: .8rem; flex-wrap: wrap; }
+    .hero-trust { margin-top: 1.6rem; font-size: .85rem; color: var(--ink-soft); display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .hero-trust span { display: inline-flex; align-items: center; gap: .4rem; }
+
+    /* ---------- WhatsApp mockup ---------- */
+    .phone {
+      width: 320px; max-width: 100%; margin: 0 auto; background: #0b141a; border-radius: 36px;
+      padding: 12px; box-shadow: var(--shadow); border: 1px solid #0b141a;
+    }
+    .phone-screen { background: #e5ddd5; border-radius: 26px; overflow: hidden;
+      background-image: linear-gradient(rgba(229,221,213,.92), rgba(229,221,213,.92)); }
+    .wa-top {
+      background: var(--brand); color: #fff; display: flex; align-items: center; gap: .65rem; padding: .85rem .9rem;
+    }
+    .wa-avatar { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; font-size: 1.1rem; }
+    .wa-name { font-weight: 700; font-size: .95rem; line-height: 1.1; }
+    .wa-status { font-size: .72rem; opacity: .85; }
+    .wa-body { padding: 1rem .8rem 1.2rem; display: flex; flex-direction: column; gap: .5rem; min-height: 360px; }
+    .bubble { max-width: 80%; padding: .5rem .7rem; border-radius: 10px; font-size: .85rem; box-shadow: 0 1px 1px rgba(0,0,0,.06); position: relative; }
+    .in { background: #fff; align-self: flex-start; border-top-left-radius: 2px; }
+    .out { background: #d9fdd3; align-self: flex-end; border-top-right-radius: 2px; }
+    .time { display: block; font-size: .62rem; color: #667781; text-align: right; margin-top: .15rem; }
+    .badge-bot { font-size: .62rem; font-weight: 700; color: var(--accent); }
+
+    /* ---------- Sections ---------- */
+    section { padding: 4.5rem 0; }
+    .section-head { max-width: 38rem; margin: 0 auto 2.8rem; text-align: center; }
+    .kicker { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+    .section-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); letter-spacing: -.6px; color: var(--brand); margin-top: .5rem; }
+    .section-head p { margin-top: .8rem; color: var(--ink-soft); font-size: 1.05rem; }
+
+    /* Problem */
+    .problem { background: var(--bg-soft); }
+    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .pain {
+      background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem;
+    }
+    .pain .ic { font-size: 1.6rem; }
+    .pain h3 { font-size: 1.05rem; margin: .6rem 0 .35rem; color: var(--brand); }
+    .pain p { color: var(--ink-soft); font-size: .93rem; }
+
+    /* Solution cards */
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .card {
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 1.7rem 1.4rem; background: #fff;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .card .ic {
+      width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; font-size: 1.4rem;
+      background: var(--accent-soft); margin-bottom: 1rem;
+    }
+    .card h3 { font-size: 1.08rem; color: var(--brand); margin-bottom: .4rem; }
+    .card p { color: var(--ink-soft); font-size: .92rem; }
+
+    /* Steps */
+    .steps { background: var(--brand); color: #fff; }
+    .steps .section-head h2 { color: #fff; }
+    .steps .section-head p { color: rgba(255,255,255,.8); }
+    .steps .kicker { color: #7fdcb0; }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .step { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 1.8rem 1.5rem; }
+    .step .num {
+      width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800;
+      display: grid; place-items: center; margin-bottom: 1rem;
+    }
+    .step h3 { font-size: 1.1rem; margin-bottom: .4rem; }
+    .step p { color: rgba(255,255,255,.78); font-size: .93rem; }
+
+    /* Audience */
+    .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .aud {
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; display: flex; gap: 1rem; align-items: flex-start; background: #fff;
+    }
+    .aud .ic { font-size: 1.8rem; }
+    .aud h3 { font-size: 1.05rem; color: var(--brand); margin-bottom: .25rem; }
+    .aud p { color: var(--ink-soft); font-size: .92rem; }
+
+    /* Contact */
+    .contact { background: var(--bg-soft); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 2.5rem; align-items: start; }
+    .contact-info h2 { font-size: clamp(1.6rem, 3vw, 2rem); color: var(--brand); letter-spacing: -.6px; }
+    .contact-info p { color: var(--ink-soft); margin-top: .8rem; }
+    .contact-list { margin-top: 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; gap: .9rem; align-items: center; }
+    .contact-item .ic { width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); display: grid; place-items: center; font-size: 1.2rem; flex: none; }
+    .contact-item .label { font-size: .78rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .05em; }
+    .contact-item .value { font-weight: 600; color: var(--ink); }
+    .consent-note { margin-top: 1.5rem; font-size: .82rem; color: var(--ink-soft); background: var(--accent-soft); border-radius: 12px; padding: .9rem 1rem; }
+
+    form { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.8rem; }
+    .field { margin-bottom: 1.1rem; }
+    label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .4rem; color: var(--ink); }
+    input, textarea {
+      width: 100%; padding: .8rem .9rem; border: 1px solid var(--line); border-radius: 10px; font-size: .95rem;
+      font-family: inherit; color: var(--ink); background: #fff;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    textarea { resize: vertical; min-height: 110px; }
+    .checkbox { display: flex; gap: .6rem; align-items: flex-start; font-size: .85rem; color: var(--ink-soft); }
+    .checkbox input { width: auto; margin-top: .2rem; }
+    form .btn-primary { width: 100%; margin-top: .4rem; }
+
+    /* ---------- Footer ---------- */
+    footer.site {
+      background: #08222f; color: rgba(255,255,255,.78); padding: 3.2rem 0 2rem; font-size: .92rem;
+    }
+    .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; gap: 2.5rem; }
+    .foot-brand .brand { color: #fff; margin-bottom: .8rem; }
+    .foot-brand p { color: rgba(255,255,255,.6); font-size: .9rem; max-width: 22rem; }
+    .foot h4 { color: #fff; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem; }
+    .foot a, .foot li { color: rgba(255,255,255,.7); font-size: .9rem; line-height: 1.9; }
+    .foot a:hover { color: #fff; }
+    .foot ul { list-style: none; }
+    .foot-bottom {
+      border-top: 1px solid rgba(255,255,255,.12); margin-top: 2.5rem; padding-top: 1.4rem;
+      display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: .82rem; color: rgba(255,255,255,.55);
+    }
+    .foot-bottom a { color: rgba(255,255,255,.75); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero { padding: 3rem 0; }
+      .phone { order: -1; }
+      .problem-grid, .cards, .steps-grid, .audience-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .foot-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .menu-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;
+        position: absolute; top: 68px; left: 0; right: 0; background: #fff; padding: 1.2rem 20px;
+        border-bottom: 1px solid var(--line); box-shadow: var(--shadow);
+      }
+    }
+    @media (max-width: 560px) {
+      .problem-grid, .cards, .steps-grid, .audience-grid, .foot-grid { grid-template-columns: 1fr; }
+      section { padding: 3.2rem 0; }
+      .nav-cta .btn-ghost { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="center">
-    <div class="icon">🤖</div>
-    <h1>Blit Bot</h1>
-  </div>
-  <footer style="position:fixed;bottom:1rem;width:100%;text-align:center;font-size:0.75rem;color:#888;">
-    <a href="privacy_policy.html" style="color:#888;">Política de Privacidad</a>
+
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="brand"><span class="logo">◆</span> Sixvort</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#problema">El problema</a>
+        <a href="#solucion">Blitbot</a>
+        <a href="#como">Cómo funciona</a>
+        <a href="#para-quien">Para quién</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav-cta">
+        <a href="#como" class="btn btn-ghost">Ver cómo funciona</a>
+        <a href="#contacto" class="btn btn-primary">Contáctanos</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">⚡ Automatización de WhatsApp para PyMEs</span>
+          <h1>Tu WhatsApp atiende, vende y <span>organiza tus clientes</span> solo.</h1>
+          <p class="lead">
+            En América Latina las PyMEs venden por WhatsApp, pero lo hacen a mano y se les escapan clientes.
+            <strong>Sixvort</strong> instala <strong>Blitbot</strong>: un asistente con inteligencia artificial que responde,
+            toma pedidos sin errores y ordena a tus clientes — 24/7.
+          </p>
+          <div class="hero-cta">
+            <a href="#contacto" class="btn btn-primary">Quiero automatizar mi WhatsApp</a>
+            <a href="#solucion" class="btn btn-ghost">Conocer Blitbot</a>
+          </div>
+          <div class="hero-trust">
+            <span>✅ Software B2B, sin instalar apps</span>
+            <span>🟢 Sobre WhatsApp Business</span>
+            <span>👤 Con agente humano cuando hace falta</span>
+          </div>
+        </div>
+
+        <!-- WhatsApp conversation mockup -->
+        <div class="phone" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="wa-top">
+              <div class="wa-avatar">🤖</div>
+              <div>
+                <div class="wa-name">Tienda Doña Rosa</div>
+                <div class="wa-status">en línea · Blitbot</div>
+              </div>
+            </div>
+            <div class="wa-body">
+              <div class="bubble in">¡Hola! 👋 Soy el asistente de Doña Rosa. ¿Qué te gustaría pedir hoy?<span class="time">9:41</span></div>
+              <div class="bubble out">Hola, quiero 2 tequeños y una malta<span class="time">9:41</span></div>
+              <div class="bubble in">¡Listo! Anoté:<br>• 2 Tequeños — $4,00<br>• 1 Malta — $1,50<br><b>Total: $5,50</b><br>¿Lo envío a tu dirección de siempre? 📍<span class="time">9:42</span></div>
+              <div class="bubble out">Sí, gracias 🙌<span class="time">9:42</span></div>
+              <div class="bubble in">Pedido confirmado ✅ Te aviso cuando salga. ¿Quieres hablar con una persona del equipo? Escribe <b>"agente"</b> cuando quieras.<span class="time">9:42</span><span class="badge-bot">Automatizado por Blitbot</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Problem ===== -->
+    <section class="problem" id="problema">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">El problema</span>
+          <h2>Tu negocio vive en WhatsApp, pero lo gestionas a mano</h2>
+          <p>La mayoría de las PyMEs en Venezuela y LatAm atienden, toman pedidos y cierran ventas por chat — de forma manual y desordenada. Así se pierde tiempo, dinero y clientes.</p>
+        </div>
+        <div class="problem-grid">
+          <div class="pain">
+            <div class="ic">⏰</div>
+            <h3>Mensajes sin responder</h3>
+            <p>Llegan consultas a toda hora y no alcanzas a contestar todas. Cada mensaje frío es una venta que se enfría.</p>
+          </div>
+          <div class="pain">
+            <div class="ic">📝</div>
+            <h3>Pedidos con errores</h3>
+            <p>Anotar pedidos a mano, entre mil chats, lleva a confusiones, productos equivocados y reclamos.</p>
+          </div>
+          <div class="pain">
+            <div class="ic">🤷</div>
+            <h3>Clientes desordenados</h3>
+            <p>No sabes quién te compró, quién preguntó ni a quién darle seguimiento. La información se pierde en la conversación.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Solution ===== -->
+    <section id="solucion">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">La solución: Blitbot</span>
+          <h2>Un asistente de ventas y atención por WhatsApp</h2>
+          <p>Blitbot combina inteligencia artificial con flujos de venta automatizados para que tu negocio atienda y venda sin que tú estés pendiente del teléfono.</p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div class="ic">💬</div>
+            <h3>Responde y atiende 24/7</h3>
+            <p>Contesta consultas al instante, a cualquier hora, con respuestas claras y con el tono de tu negocio.</p>
+          </div>
+          <div class="card">
+            <div class="ic">🛒</div>
+            <h3>Toma pedidos sin errores</h3>
+            <p>Arma el pedido, calcula totales y confirma con el cliente. Todo queda registrado, sin malentendidos.</p>
+          </div>
+          <div class="card">
+            <div class="ic">📒</div>
+            <h3>Organiza tus clientes (CRM)</h3>
+            <p>Guarda nombre, teléfono y el historial de cada cliente para que puedas darle seguimiento y vender más.</p>
+          </div>
+          <div class="card">
+            <div class="ic">✅</div>
+            <h3>Confirma pagos</h3>
+            <p>Recibe y registra la confirmación de pago para cerrar la venta de forma ordenada y trazable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== How it works ===== -->
+    <section class="steps" id="como">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Cómo funciona</span>
+          <h2>Listo en 3 pasos simples</h2>
+          <p>Nosotros nos encargamos de la instalación y la configuración. Tú te dedicas a vender.</p>
+        </div>
+        <div class="steps-grid">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>Conectamos tu WhatsApp</h3>
+            <p>Integramos Blitbot al WhatsApp Business de tu negocio. Sin cambiar de número y sin que tus clientes instalen nada.</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>Configuramos tu catálogo y flujos</h3>
+            <p>Cargamos tus productos, precios y las respuestas que tu negocio necesita: pedidos, consultas y captura de clientes.</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>Tu negocio vende solo</h3>
+            <p>Blitbot atiende, toma pedidos y organiza clientes automáticamente. Y escala a un agente humano cuando se requiere.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Audience ===== -->
+    <section id="para-quien">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Para quién es</span>
+          <h2>Pensado para PyMEs que venden por WhatsApp</h2>
+          <p>Si gran parte de tu operación pasa por el chat, Blitbot es para ti.</p>
+        </div>
+        <div class="audience-grid">
+          <div class="aud">
+            <div class="ic">🍔</div>
+            <div>
+              <h3>Comida y delivery</h3>
+              <p>Restaurantes, cocinas en casa, panaderías y emprendimientos que reciben pedidos por WhatsApp.</p>
+            </div>
+          </div>
+          <div class="aud">
+            <div class="ic">🛍️</div>
+            <div>
+              <h3>Retail y tiendas</h3>
+              <p>Comercios y tiendas online que muestran catálogo y cierran ventas por chat.</p>
+            </div>
+          </div>
+          <div class="aud">
+            <div class="ic">🧰</div>
+            <div>
+              <h3>Servicios</h3>
+              <p>Profesionales y negocios de servicios que agendan, cotizan y atienden clientes por mensaje.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="contact" id="contacto">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <span class="kicker">Contacto</span>
+          <h2>Hablemos sobre tu negocio</h2>
+          <p>Cuéntanos qué vendes y te mostramos cómo Blitbot puede automatizar tu WhatsApp. Te respondemos por el canal que prefieras.</p>
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="ic">✉️</div>
+              <div>
+                <div class="label">Email</div>
+                <a class="value" href="mailto:davidalejandrodand@gmail.com">davidalejandrodand@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ic">🟢</div>
+              <div>
+                <div class="label">Teléfono / WhatsApp</div>
+                <a class="value" href="https://wa.me/584143722004">+58 414 372 2004</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="ic">📍</div>
+              <div>
+                <div class="label">Ubicación</div>
+                <div class="value">El Tigre, Venezuela</div>
+              </div>
+            </div>
+          </div>
+          <p class="consent-note">
+            🔒 La comunicación por WhatsApp es siempre <strong>bajo tu consentimiento (opt-in)</strong>: solo te escribimos si tú lo autorizas, y puedes pedir dejar de recibir mensajes cuando quieras. Cuando lo necesites, te atiende un <strong>agente humano</strong>.
+          </p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos pronto.'); this.reset();">
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Tu nombre o el de tu negocio" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="tu@correo.com" required />
+          </div>
+          <div class="field">
+            <label for="telefono">WhatsApp</label>
+            <input id="telefono" name="telefono" type="tel" placeholder="+58 ..." />
+          </div>
+          <div class="field">
+            <label for="mensaje">¿Qué vende tu negocio?</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos brevemente sobre tu negocio y qué te gustaría automatizar."></textarea>
+          </div>
+          <div class="field checkbox">
+            <input id="optin" name="optin" type="checkbox" required />
+            <label for="optin" style="font-weight:400; margin:0;">Acepto que Sixvort me contacte por WhatsApp o email y he leído la <a href="privacy_policy.html" style="color:var(--accent);font-weight:600;">Política de Privacidad</a>.</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site">
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="brand"><span class="logo">◆</span> Sixvort</div>
+          <p>Sixvort desarrolla soluciones de automatización empresarial sobre WhatsApp Business. Nuestro producto principal, <strong>Blitbot</strong>, es un asistente de ventas y atención por WhatsApp para PyMEs de América Latina. Software y servicios B2B.</p>
+        </div>
+        <div class="foot">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#problema">El problema</a></li>
+            <li><a href="#solucion">Blitbot</a></li>
+            <li><a href="#como">Cómo funciona</a></li>
+            <li><a href="#para-quien">Para quién</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="foot">
+          <h4>Contacto y legal</h4>
+          <ul>
+            <li>✉️ <a href="mailto:davidalejandrodand@gmail.com">davidalejandrodand@gmail.com</a></li>
+            <li>🟢 <a href="https://wa.me/584143722004">+58 414 372 2004</a></li>
+            <li>📍 El Tigre, Venezuela</li>
+            <li><a href="privacy_policy.html">Política de Privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Sixvort. Todos los derechos reservados.</span>
+        <span>Sixvort no comercializa alcohol, tabaco, fármacos, armas, criptomonedas ni préstamos. Solo software y servicios de automatización B2B.</span>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => links.classList.toggle('open'));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+  </script>
 </body>
 </html>
