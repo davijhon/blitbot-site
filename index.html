@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sixvort — Automatiza el WhatsApp de tu negocio con Blitbot</title>
   <meta name="description" content="Sixvort desarrolla Blitbot, el asistente de ventas y atención por WhatsApp para PyMEs de América Latina. Software B2B de automatización: responde, toma pedidos, organiza clientes y confirma pagos." />
+  <meta name="theme-color" content="#0b3a53" />
+
+  <!-- Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sixvort — Automatiza el WhatsApp de tu negocio con Blitbot" />
+  <meta property="og:description" content="Blitbot atiende, toma pedidos sin errores y organiza tus clientes por WhatsApp, 24/7. Software y servicios de automatización B2B." />
+  <meta property="og:url" content="https://davijhon.github.io/blitbot-site/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon: hexágono Sixvort -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230b3a53'/%3E%3Cstop offset='.6' stop-color='%2312597e'/%3E%3Cstop offset='1' stop-color='%231fa463'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='50,6 88,28 88,72 50,94 12,72 12,28' fill='url(%23g)'/%3E%3Cpolygon points='50,26 71,38 71,62 50,74 29,62 29,38' fill='none' stroke='white' stroke-width='4' stroke-opacity='.85'/%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     :root {
       --bg: #ffffff;
@@ -18,33 +35,46 @@
       --accent-soft: #e8f6ef;
       --radius: 16px;
       --shadow: 0 10px 40px rgba(15, 27, 36, 0.08);
+      --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --hex: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     }
     * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--font-body);
       color: var(--ink);
       background: var(--bg);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
+    img, svg { display: block; max-width: 100%; }
     .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 700; }
+
+    /* Focus accesible */
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px;
+    }
 
     /* ---------- Buttons ---------- */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-      font-size: .95rem; font-weight: 600; padding: .8rem 1.4rem; border-radius: 999px;
+      font-family: var(--font-body); font-size: .95rem; font-weight: 600; padding: .8rem 1.4rem; border-radius: 999px;
       border: 1px solid transparent; cursor: pointer; transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
       white-space: nowrap;
     }
+    .btn svg { width: 18px; height: 18px; }
     .btn-primary { background: var(--accent); color: #fff; }
     .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(31,164,99,.3); }
     .btn-ghost { background: transparent; color: var(--brand); border-color: var(--line); }
     .btn-ghost:hover { background: var(--bg-soft); }
-    .btn-light { background: #fff; color: var(--brand); }
-    .btn-light:hover { transform: translateY(-1px); }
+
+    /* ---------- Brand mark ---------- */
+    .brand { display: flex; align-items: center; gap: .6rem; font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: -.5px; color: var(--brand); }
+    .brand .logo { width: 34px; height: 34px; flex: none; }
 
     /* ---------- Header ---------- */
     header {
@@ -53,106 +83,110 @@
       border-bottom: 1px solid var(--line);
     }
     .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-    .brand { display: flex; align-items: center; gap: .6rem; font-weight: 800; font-size: 1.25rem; letter-spacing: -.5px; color: var(--brand); }
-    .brand .logo {
-      width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center;
-      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 60%, var(--accent) 130%);
-      color: #fff; font-size: 1.1rem;
-    }
     .nav-links { display: flex; align-items: center; gap: 1.6rem; }
     .nav-links a { color: var(--ink-soft); font-size: .92rem; font-weight: 500; }
     .nav-links a:hover { color: var(--ink); }
     .nav-cta { display: flex; align-items: center; gap: .75rem; }
-    .menu-toggle { display: none; background: none; border: 0; font-size: 1.5rem; color: var(--brand); cursor: pointer; }
+    .menu-toggle { display: none; background: none; border: 0; padding: .3rem; color: var(--brand); cursor: pointer; }
+    .menu-toggle svg { width: 26px; height: 26px; }
 
     /* ---------- Hero ---------- */
-    .hero { padding: 4.5rem 0 4rem; background:
+    .hero { position: relative; padding: 4.5rem 0 4rem; overflow: hidden; background:
       radial-gradient(1100px 480px at 85% -10%, #e9f5fb 0%, rgba(233,245,251,0) 60%),
       radial-gradient(800px 420px at 0% 10%, #eefaf3 0%, rgba(238,250,243,0) 55%);
     }
     .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center; }
     .eyebrow {
-      display: inline-flex; align-items: center; gap: .5rem; font-size: .8rem; font-weight: 600;
-      color: var(--accent); background: var(--accent-soft); padding: .4rem .8rem; border-radius: 999px; margin-bottom: 1.2rem;
+      display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-display); font-size: .78rem; font-weight: 600;
+      letter-spacing: .04em; color: var(--accent); background: var(--accent-soft); padding: .4rem .85rem; border-radius: 999px; margin-bottom: 1.2rem;
     }
-    .hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.2rem); line-height: 1.1; letter-spacing: -1.2px; color: var(--brand); }
+    .eyebrow svg { width: 15px; height: 15px; }
+    .hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.25rem); line-height: 1.08; letter-spacing: -1.4px; color: var(--brand); }
     .hero h1 span { color: var(--accent); }
     .hero p.lead { margin-top: 1.2rem; font-size: 1.12rem; color: var(--ink-soft); max-width: 33rem; }
     .hero-cta { margin-top: 2rem; display: flex; gap: .8rem; flex-wrap: wrap; }
     .hero-trust { margin-top: 1.6rem; font-size: .85rem; color: var(--ink-soft); display: flex; gap: 1.2rem; flex-wrap: wrap; }
-    .hero-trust span { display: inline-flex; align-items: center; gap: .4rem; }
+    .hero-trust span { display: inline-flex; align-items: center; gap: .45rem; }
+    .hero-trust svg { width: 16px; height: 16px; color: var(--accent); flex: none; }
+
+    /* ---------- Vortex (firma: hexágono de Saturno) ---------- */
+    .stage { position: relative; display: grid; place-items: center; }
+    .vortex { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; z-index: 0; }
+    .vortex svg { width: 130%; max-width: 560px; aspect-ratio: 1; overflow: visible; }
+    .vortex .ring { fill: none; stroke: var(--brand-2); stroke-width: 1; transform-origin: 100px 100px; }
+    .vortex .spin-a { animation: spin 60s linear infinite; transform-box: fill-box; transform-origin: center; }
+    .vortex .spin-b { animation: spin 90s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ---------- WhatsApp mockup ---------- */
     .phone {
-      width: 320px; max-width: 100%; margin: 0 auto; background: #0b141a; border-radius: 36px;
+      position: relative; z-index: 1; width: 320px; max-width: 100%; background: #0b141a; border-radius: 36px;
       padding: 12px; box-shadow: var(--shadow); border: 1px solid #0b141a;
     }
-    .phone-screen { background: #e5ddd5; border-radius: 26px; overflow: hidden;
-      background-image: linear-gradient(rgba(229,221,213,.92), rgba(229,221,213,.92)); }
-    .wa-top {
-      background: var(--brand); color: #fff; display: flex; align-items: center; gap: .65rem; padding: .85rem .9rem;
-    }
+    .phone-screen { background: #e5ddd5; border-radius: 26px; overflow: hidden; }
+    .wa-top { background: var(--brand); color: #fff; display: flex; align-items: center; gap: .65rem; padding: .85rem .9rem; }
     .wa-avatar { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; font-size: 1.1rem; }
-    .wa-name { font-weight: 700; font-size: .95rem; line-height: 1.1; }
+    .wa-name { font-family: var(--font-display); font-weight: 600; font-size: .95rem; line-height: 1.1; }
     .wa-status { font-size: .72rem; opacity: .85; }
     .wa-body { padding: 1rem .8rem 1.2rem; display: flex; flex-direction: column; gap: .5rem; min-height: 360px; }
-    .bubble { max-width: 80%; padding: .5rem .7rem; border-radius: 10px; font-size: .85rem; box-shadow: 0 1px 1px rgba(0,0,0,.06); position: relative; }
+    .bubble { max-width: 82%; padding: .5rem .7rem; border-radius: 10px; font-size: .85rem; box-shadow: 0 1px 1px rgba(0,0,0,.06); }
     .in { background: #fff; align-self: flex-start; border-top-left-radius: 2px; }
     .out { background: #d9fdd3; align-self: flex-end; border-top-right-radius: 2px; }
     .time { display: block; font-size: .62rem; color: #667781; text-align: right; margin-top: .15rem; }
-    .badge-bot { font-size: .62rem; font-weight: 700; color: var(--accent); }
+    .badge-bot { display: block; font-size: .62rem; font-weight: 600; color: var(--accent); margin-top: .2rem; }
+    /* animación de cascada (sólo cuando JS está activo y hay movimiento) */
+    .js-anim .wa-body .bubble, .js-anim .wa-body .typing { opacity: 0; transform: translateY(8px); }
+    .js-anim .wa-body .reveal { opacity: 1; transform: none; transition: opacity .3s ease, transform .3s ease; }
+    .typing { align-self: flex-start; background: #fff; border-radius: 10px; border-top-left-radius: 2px; padding: .6rem .75rem; box-shadow: 0 1px 1px rgba(0,0,0,.06); }
+    .typing span { display: inline-block; width: 7px; height: 7px; margin: 0 1.5px; border-radius: 50%; background: #9aa7af; animation: blink 1.2s infinite both; }
+    .typing span:nth-child(2) { animation-delay: .2s; }
+    .typing span:nth-child(3) { animation-delay: .4s; }
+    @keyframes blink { 0%, 80%, 100% { opacity: .3; } 40% { opacity: 1; } }
 
     /* ---------- Sections ---------- */
     section { padding: 4.5rem 0; }
     .section-head { max-width: 38rem; margin: 0 auto 2.8rem; text-align: center; }
-    .kicker { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+    .kicker { font-family: var(--font-display); font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
     .section-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); letter-spacing: -.6px; color: var(--brand); margin-top: .5rem; }
     .section-head p { margin-top: .8rem; color: var(--ink-soft); font-size: 1.05rem; }
+
+    /* icono SVG reutilizable */
+    .ic { color: var(--accent); }
+    .ic svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .ic-box { width: 48px; height: 48px; border-radius: 13px; display: grid; place-items: center; background: var(--accent-soft); margin-bottom: 1rem; }
 
     /* Problem */
     .problem { background: var(--bg-soft); }
     .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
-    .pain {
-      background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem;
-    }
-    .pain .ic { font-size: 1.6rem; }
-    .pain h3 { font-size: 1.05rem; margin: .6rem 0 .35rem; color: var(--brand); }
+    .pain { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; }
+    .pain h3 { font-size: 1.05rem; margin: .2rem 0 .35rem; color: var(--brand); }
     .pain p { color: var(--ink-soft); font-size: .93rem; }
 
     /* Solution cards */
     .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
-    .card {
-      border: 1px solid var(--line); border-radius: var(--radius); padding: 1.7rem 1.4rem; background: #fff;
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
+    .card { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.7rem 1.4rem; background: #fff; transition: transform .15s ease, box-shadow .15s ease; }
     .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-    .card .ic {
-      width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; font-size: 1.4rem;
-      background: var(--accent-soft); margin-bottom: 1rem;
-    }
     .card h3 { font-size: 1.08rem; color: var(--brand); margin-bottom: .4rem; }
     .card p { color: var(--ink-soft); font-size: .92rem; }
 
     /* Steps */
-    .steps { background: var(--brand); color: #fff; }
+    .steps { background: var(--brand); color: #fff; position: relative; overflow: hidden; }
     .steps .section-head h2 { color: #fff; }
     .steps .section-head p { color: rgba(255,255,255,.8); }
     .steps .kicker { color: #7fdcb0; }
-    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; position: relative; z-index: 1; }
     .step { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 1.8rem 1.5rem; }
     .step .num {
-      width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800;
-      display: grid; place-items: center; margin-bottom: 1rem;
+      width: 46px; height: 46px; background: var(--accent); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
+      display: grid; place-items: center; margin-bottom: 1rem; clip-path: var(--hex);
     }
     .step h3 { font-size: 1.1rem; margin-bottom: .4rem; }
     .step p { color: rgba(255,255,255,.78); font-size: .93rem; }
 
     /* Audience */
     .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
-    .aud {
-      border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; display: flex; gap: 1rem; align-items: flex-start; background: #fff;
-    }
-    .aud .ic { font-size: 1.8rem; }
+    .aud { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; display: flex; gap: 1rem; align-items: flex-start; background: #fff; }
+    .aud .ic-box { margin-bottom: 0; flex: none; }
     .aud h3 { font-size: 1.05rem; color: var(--brand); margin-bottom: .25rem; }
     .aud p { color: var(--ink-soft); font-size: .92rem; }
 
@@ -160,10 +194,10 @@
     .contact { background: var(--bg-soft); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 2.5rem; align-items: start; }
     .contact-info h2 { font-size: clamp(1.6rem, 3vw, 2rem); color: var(--brand); letter-spacing: -.6px; }
-    .contact-info p { color: var(--ink-soft); margin-top: .8rem; }
+    .contact-info > p { color: var(--ink-soft); margin-top: .8rem; }
     .contact-list { margin-top: 1.6rem; display: flex; flex-direction: column; gap: 1rem; }
     .contact-item { display: flex; gap: .9rem; align-items: center; }
-    .contact-item .ic { width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); display: grid; place-items: center; font-size: 1.2rem; flex: none; }
+    .contact-item .ic-box { width: 44px; height: 44px; margin-bottom: 0; flex: none; }
     .contact-item .label { font-size: .78rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .05em; }
     .contact-item .value { font-weight: 600; color: var(--ink); }
     .consent-note { margin-top: 1.5rem; font-size: .82rem; color: var(--ink-soft); background: var(--accent-soft); border-radius: 12px; padding: .9rem 1rem; }
@@ -182,13 +216,11 @@
     form .btn-primary { width: 100%; margin-top: .4rem; }
 
     /* ---------- Footer ---------- */
-    footer.site {
-      background: #08222f; color: rgba(255,255,255,.78); padding: 3.2rem 0 2rem; font-size: .92rem;
-    }
+    footer.site { background: #08222f; color: rgba(255,255,255,.78); padding: 3.2rem 0 2rem; font-size: .92rem; }
     .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; gap: 2.5rem; }
     .foot-brand .brand { color: #fff; margin-bottom: .8rem; }
     .foot-brand p { color: rgba(255,255,255,.6); font-size: .9rem; max-width: 22rem; }
-    .foot h4 { color: #fff; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem; }
+    .foot h4 { font-family: var(--font-display); color: #fff; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem; }
     .foot a, .foot li { color: rgba(255,255,255,.7); font-size: .9rem; line-height: 1.9; }
     .foot a:hover { color: #fff; }
     .foot ul { list-style: none; }
@@ -202,7 +234,7 @@
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .hero { padding: 3rem 0; }
-      .phone { order: -1; }
+      .stage { order: -1; }
       .problem-grid, .cards, .steps-grid, .audience-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
       .foot-grid { grid-template-columns: 1fr 1fr; }
@@ -219,6 +251,13 @@
       section { padding: 3.2rem 0; }
       .nav-cta .btn-ghost { display: none; }
     }
+
+    /* ---------- Movimiento reducido ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .js-anim .wa-body .bubble, .js-anim .wa-body .typing { opacity: 1; transform: none; }
+      .typing { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -226,8 +265,17 @@
   <!-- ===== Header ===== -->
   <header>
     <div class="container nav">
-      <a href="#inicio" class="brand"><span class="logo">◆</span> Sixvort</a>
-      <nav class="nav-links" id="navLinks">
+      <a href="#inicio" class="brand" aria-label="Sixvort — inicio">
+        <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#0b3a53"/><stop offset=".6" stop-color="#12597e"/><stop offset="1" stop-color="#1fa463"/>
+          </linearGradient></defs>
+          <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#lg)"/>
+          <polygon points="50,26 71,38 71,62 50,74 29,62 29,38" fill="none" stroke="#fff" stroke-width="4" stroke-opacity=".85"/>
+        </svg>
+        Sixvort
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Principal">
         <a href="#problema">El problema</a>
         <a href="#solucion">Blitbot</a>
         <a href="#como">Cómo funciona</a>
@@ -237,7 +285,9 @@
       <div class="nav-cta">
         <a href="#como" class="btn btn-ghost">Ver cómo funciona</a>
         <a href="#contacto" class="btn btn-primary">Contáctanos</a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
     </div>
   </header>
@@ -248,7 +298,10 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <span class="eyebrow">⚡ Automatización de WhatsApp para PyMEs</span>
+          <span class="eyebrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+            Automatización de WhatsApp para PyMEs
+          </span>
           <h1>Tu WhatsApp atiende, vende y <span>organiza tus clientes</span> solo.</h1>
           <p class="lead">
             En América Latina las PyMEs venden por WhatsApp, pero lo hacen a mano y se les escapan clientes.
@@ -260,28 +313,44 @@
             <a href="#solucion" class="btn btn-ghost">Conocer Blitbot</a>
           </div>
           <div class="hero-trust">
-            <span>✅ Software B2B, sin instalar apps</span>
-            <span>🟢 Sobre WhatsApp Business</span>
-            <span>👤 Con agente humano cuando hace falta</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Software B2B, sin instalar apps</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Sobre WhatsApp Business</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Con agente humano cuando hace falta</span>
           </div>
         </div>
 
-        <!-- WhatsApp conversation mockup -->
-        <div class="phone" aria-hidden="true">
-          <div class="phone-screen">
-            <div class="wa-top">
-              <div class="wa-avatar">🤖</div>
-              <div>
-                <div class="wa-name">Tienda Doña Rosa</div>
-                <div class="wa-status">en línea · Blitbot</div>
+        <!-- Stage: vórtice hexagonal + conversación de WhatsApp -->
+        <div class="stage">
+          <div class="vortex" aria-hidden="true">
+            <svg viewBox="0 0 200 200">
+              <g class="spin-a" opacity=".5">
+                <polygon class="ring" points="100,10 177.94,55 177.94,145 100,190 22.06,145 22.06,55"/>
+                <polygon class="ring" points="100,38 154.12,69 154.12,131 100,162 45.88,131 45.88,69"/>
+              </g>
+              <g class="spin-b" opacity=".4">
+                <polygon class="ring" points="100,24 166,62 166,138 100,176 34,138 34,62"/>
+                <polygon class="ring" points="100,55 138.97,77.5 138.97,122.5 100,145 61.03,122.5 61.03,77.5"/>
+              </g>
+            </svg>
+          </div>
+
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="wa-top">
+                <div class="wa-avatar" aria-hidden="true">🤖</div>
+                <div>
+                  <div class="wa-name">Tienda Doña Rosa</div>
+                  <div class="wa-status">en línea · Blitbot</div>
+                </div>
               </div>
-            </div>
-            <div class="wa-body">
-              <div class="bubble in">¡Hola! 👋 Soy el asistente de Doña Rosa. ¿Qué te gustaría pedir hoy?<span class="time">9:41</span></div>
-              <div class="bubble out">Hola, quiero 2 tequeños y una malta<span class="time">9:41</span></div>
-              <div class="bubble in">¡Listo! Anoté:<br>• 2 Tequeños — $4,00<br>• 1 Malta — $1,50<br><b>Total: $5,50</b><br>¿Lo envío a tu dirección de siempre? 📍<span class="time">9:42</span></div>
-              <div class="bubble out">Sí, gracias 🙌<span class="time">9:42</span></div>
-              <div class="bubble in">Pedido confirmado ✅ Te aviso cuando salga. ¿Quieres hablar con una persona del equipo? Escribe <b>"agente"</b> cuando quieras.<span class="time">9:42</span><span class="badge-bot">Automatizado por Blitbot</span></div>
+              <div class="wa-body" id="chat">
+                <div class="bubble in">¡Hola! 👋 Soy el asistente de Doña Rosa. ¿Qué te gustaría pedir hoy?<span class="time">9:41</span></div>
+                <div class="bubble out">Hola, quiero 2 tequeños y una malta<span class="time">9:41</span></div>
+                <div class="typing" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="bubble in">¡Listo! Anoté:<br>• 2 Tequeños — $4,00<br>• 1 Malta — $1,50<br><b>Total: $5,50</b><br>¿Lo envío a tu dirección de siempre? 📍<span class="time">9:42</span></div>
+                <div class="bubble out">Sí, gracias 🙌<span class="time">9:42</span></div>
+                <div class="bubble in">Pedido confirmado ✅ Te aviso cuando salga. ¿Quieres hablar con una persona del equipo? Escribe <b>"agente"</b> cuando quieras.<span class="time">9:42</span><span class="badge-bot">Automatizado por Blitbot</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -298,17 +367,17 @@
         </div>
         <div class="problem-grid">
           <div class="pain">
-            <div class="ic">⏰</div>
+            <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
             <h3>Mensajes sin responder</h3>
             <p>Llegan consultas a toda hora y no alcanzas a contestar todas. Cada mensaje frío es una venta que se enfría.</p>
           </div>
           <div class="pain">
-            <div class="ic">📝</div>
+            <div class="ic"><svg viewBox="0 0 24 24"><path d="M9 4h6a1 1 0 0 1 1 1v0a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v0a1 1 0 0 1 1-1z"/><path d="M16 5h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2"/><path d="m9.5 13 1.5 1.5L14 11"/></svg></div>
             <h3>Pedidos con errores</h3>
             <p>Anotar pedidos a mano, entre mil chats, lleva a confusiones, productos equivocados y reclamos.</p>
           </div>
           <div class="pain">
-            <div class="ic">🤷</div>
+            <div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M17 8h4M19 6v4"/></svg></div>
             <h3>Clientes desordenados</h3>
             <p>No sabes quién te compró, quién preguntó ni a quién darle seguimiento. La información se pierde en la conversación.</p>
           </div>
@@ -326,22 +395,22 @@
         </div>
         <div class="cards">
           <div class="card">
-            <div class="ic">💬</div>
+            <div class="ic ic-box"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 0 1-.9-3.8A8.38 8.38 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></div>
             <h3>Responde y atiende 24/7</h3>
             <p>Contesta consultas al instante, a cualquier hora, con respuestas claras y con el tono de tu negocio.</p>
           </div>
           <div class="card">
-            <div class="ic">🛒</div>
+            <div class="ic ic-box"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L23 7H6"/></svg></div>
             <h3>Toma pedidos sin errores</h3>
             <p>Arma el pedido, calcula totales y confirma con el cliente. Todo queda registrado, sin malentendidos.</p>
           </div>
           <div class="card">
-            <div class="ic">📒</div>
+            <div class="ic ic-box"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="10" r="2.2"/><path d="M8.5 16a3.5 3.5 0 0 1 7 0"/><path d="M4 9h2M4 13h2"/></svg></div>
             <h3>Organiza tus clientes (CRM)</h3>
             <p>Guarda nombre, teléfono y el historial de cada cliente para que puedas darle seguimiento y vender más.</p>
           </div>
           <div class="card">
-            <div class="ic">✅</div>
+            <div class="ic ic-box"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div>
             <h3>Confirma pagos</h3>
             <p>Recibe y registra la confirmación de pago para cerrar la venta de forma ordenada y trazable.</p>
           </div>
@@ -387,21 +456,21 @@
         </div>
         <div class="audience-grid">
           <div class="aud">
-            <div class="ic">🍔</div>
+            <div class="ic ic-box"><svg viewBox="0 0 24 24"><path d="M4 3v7a3 3 0 0 0 6 0V3"/><path d="M7 3v18"/><path d="M17 3c-1.7 0-3 2-3 5s1.3 4 3 4v9"/></svg></div>
             <div>
               <h3>Comida y delivery</h3>
               <p>Restaurantes, cocinas en casa, panaderías y emprendimientos que reciben pedidos por WhatsApp.</p>
             </div>
           </div>
           <div class="aud">
-            <div class="ic">🛍️</div>
+            <div class="ic ic-box"><svg viewBox="0 0 24 24"><path d="M6 2 4 6v0a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 4-1.5L18 2z"/><path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/></svg></div>
             <div>
               <h3>Retail y tiendas</h3>
               <p>Comercios y tiendas online que muestran catálogo y cierran ventas por chat.</p>
             </div>
           </div>
           <div class="aud">
-            <div class="ic">🧰</div>
+            <div class="ic ic-box"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.3 2.3-2-2 2.3-2.3z"/></svg></div>
             <div>
               <h3>Servicios</h3>
               <p>Profesionales y negocios de servicios que agendan, cotizan y atienden clientes por mensaje.</p>
@@ -420,21 +489,21 @@
           <p>Cuéntanos qué vendes y te mostramos cómo Blitbot puede automatizar tu WhatsApp. Te respondemos por el canal que prefieras.</p>
           <div class="contact-list">
             <div class="contact-item">
-              <div class="ic">✉️</div>
+              <div class="ic ic-box"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
               <div>
                 <div class="label">Email</div>
                 <a class="value" href="mailto:davidalejandrodand@gmail.com">davidalejandrodand@gmail.com</a>
               </div>
             </div>
             <div class="contact-item">
-              <div class="ic">🟢</div>
+              <div class="ic ic-box"><svg viewBox="0 0 24 24"><path d="M21 16.5v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 3.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L7.1 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></div>
               <div>
                 <div class="label">Teléfono / WhatsApp</div>
                 <a class="value" href="https://wa.me/584143722004">+58 414 372 2004</a>
               </div>
             </div>
             <div class="contact-item">
-              <div class="ic">📍</div>
+              <div class="ic ic-box"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
               <div>
                 <div class="label">Ubicación</div>
                 <div class="value">El Tigre, Venezuela</div>
@@ -478,7 +547,13 @@
     <div class="container">
       <div class="foot-grid">
         <div class="foot-brand">
-          <div class="brand"><span class="logo">◆</span> Sixvort</div>
+          <div class="brand">
+            <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+              <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#lg)"/>
+              <polygon points="50,26 71,38 71,62 50,74 29,62 29,38" fill="none" stroke="#fff" stroke-width="4" stroke-opacity=".85"/>
+            </svg>
+            Sixvort
+          </div>
           <p>Sixvort desarrolla soluciones de automatización empresarial sobre WhatsApp Business. Nuestro producto principal, <strong>Blitbot</strong>, es un asistente de ventas y atención por WhatsApp para PyMEs de América Latina. Software y servicios B2B.</p>
         </div>
         <div class="foot">
@@ -509,10 +584,40 @@
   </footer>
 
   <script>
+    // Menú móvil con estado accesible
     const toggle = document.getElementById('menuToggle');
     const links = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => links.classList.toggle('open'));
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Cascada del chat (elemento firma) — sólo si el usuario acepta movimiento
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const chat = document.getElementById('chat');
+    if (chat && !prefersReduced) {
+      document.body.classList.add('js-anim');
+      const items = Array.from(chat.children);
+      const typing = chat.querySelector('.typing');
+      let t = 150;
+      items.forEach((el) => {
+        if (el === typing) return; // el "escribiendo" se maneja aparte
+        // mostrar el indicador de "escribiendo" justo antes de la respuesta del bot
+        if (el.previousElementSibling === typing) {
+          setTimeout(() => typing.classList.add('reveal'), t);
+          t += 600;
+          setTimeout(() => { typing.style.display = 'none'; }, t);
+          t += 80;
+        }
+        const delay = t;
+        setTimeout(() => el.classList.add('reveal'), delay);
+        t += 320;
+      });
+    }
   </script>
 </body>
 </html>

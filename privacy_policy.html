@@ -5,24 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Política de Privacidad — Sixvort (Blitbot)</title>
   <meta name="description" content="Política de Privacidad de Sixvort y su asistente Blitbot: qué datos recolectamos, cómo los usamos, con quién se comparten, retención, derechos del usuario y cómo retirar el consentimiento." />
+  <meta name="theme-color" content="#0b3a53" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230b3a53'/%3E%3Cstop offset='.6' stop-color='%2312597e'/%3E%3Cstop offset='1' stop-color='%231fa463'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='50,6 88,28 88,72 50,94 12,72 12,28' fill='url(%23g)'/%3E%3Cpolygon points='50,26 71,38 71,62 50,74 29,62 29,38' fill='none' stroke='white' stroke-width='4' stroke-opacity='.85'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ink: #0f1b24; --ink-soft: #51626d; --brand: #0b3a53; --accent: #1fa463;
+      --ink: #0f1b24; --ink-soft: #51626d; --brand: #0b3a53; --brand-2: #12597e; --accent: #1fa463;
       --line: #e4e9ed; --bg-soft: #f5f7f9;
+      --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--font-body);
       color: var(--ink); background: #fff; line-height: 1.75; -webkit-font-smoothing: antialiased;
     }
     a { color: var(--accent); }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
     .topbar { border-bottom: 1px solid var(--line); background: #fff; position: sticky; top: 0; z-index: 10; }
     .topbar .inner { max-width: 760px; margin: 0 auto; padding: 1rem 20px; display: flex; align-items: center; justify-content: space-between; }
-    .brand { display: flex; align-items: center; gap: .55rem; font-weight: 800; font-size: 1.15rem; letter-spacing: -.5px; color: var(--brand); }
-    .brand .logo { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; color: #fff; font-size: 1rem;
-      background: linear-gradient(135deg, var(--brand), #12597e 60%, var(--accent) 130%); }
+    .brand { display: flex; align-items: center; gap: .55rem; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: -.5px; color: var(--brand); }
+    .brand .logo { width: 30px; height: 30px; flex: none; }
     .topbar a.back { font-size: .9rem; font-weight: 600; color: var(--brand); }
     .container { max-width: 760px; margin: 0 auto; padding: 2.6rem 20px 3rem; }
+    h1, h2, h3 { font-family: var(--font-display); }
     h1 { font-size: 2rem; letter-spacing: -.8px; color: var(--brand); }
     .subtitle { color: var(--ink-soft); font-size: .9rem; margin: .4rem 0 2rem; }
     .intro { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem 1.3rem; margin-bottom: 2rem; }
@@ -44,7 +52,15 @@
 <body>
   <div class="topbar">
     <div class="inner">
-      <a href="index.html" class="brand"><span class="logo">◆</span> Sixvort</a>
+      <a href="index.html" class="brand">
+        <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#0b3a53"/><stop offset=".6" stop-color="#12597e"/><stop offset="1" stop-color="#1fa463"/>
+          </linearGradient></defs>
+          <polygon points="50,6 88,28 88,72 50,94 12,72 12,28" fill="url(#lg)"/>
+          <polygon points="50,26 71,38 71,62 50,74 29,62 29,38" fill="none" stroke="#fff" stroke-width="4" stroke-opacity=".85"/>
+        </svg>
+        Sixvort</a>
       <a href="index.html" class="back">← Volver al inicio</a>
     </div>
   </div>
